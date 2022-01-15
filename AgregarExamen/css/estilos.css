@@ -1,0 +1,313 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: sans-serif;
+    margin: 0;
+    background: #ffd;
+    padding: 0;
+    margin: 0;
+    
+}
+header{
+    margin-top: -10px;
+    box-shadow: 0 0 20px 1px rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding-top: 20px;
+    background: #b75;
+}
+h1{
+    margin: 0;
+    padding: 0;
+    width: auto;
+    font-size: 1.35em;
+    text-align: center;
+    letter-spacing: 0.3em;
+    color: #ffd;
+}
+
+#div_titulo{
+    width: 95%;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: 5%;
+    padding: auto;
+    padding-top: 15px;
+    position: relative;
+    
+}
+    .txt_examen,lbl_examen{
+        display: block;
+        width: 100%;
+    }
+    .txt_examen{
+        font-size: 1em;
+        background: rgba(0,0,0,0.0);
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-top: 10px;
+        padding-left: 2%;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 5px;
+    }
+    .txa_examen{
+         font-size: 1em;
+        background: rgba(0,0,0,0.0);
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-top: 10px;
+        padding-left: 2%;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 5px;
+        resize:none;
+        font-family: sans-serif;
+        font-size: 1em;
+        width: 100%;
+        box-sizing:border-box;
+        line-height:top;
+        overflow-y:hidden;
+        padding-top: 5px;
+        padding-bottom: 5px;
+         outline: inherit;
+        transition: all 0.2s;
+}
+.txa_examen_focus{
+        outline: inherit;
+        border: 2px, solid;
+        border-color: #b75;
+       border-width: 1.5px;
+}
+
+    .lbl_examen{
+        margin: -25px 0 0 10px;
+        padding: 0 10px 0 2px;
+        color: rgba(10,10,10,.5);
+        z-index: -20;
+        position: absolute;
+        transition: all 0.2s;
+        background: #ffd;
+    }
+    .lbl_pregunta {
+        position: absolute;
+        z-index: -20;
+        margin:16px 0 0 10px;
+        display: block;
+        color: rgba(10,10,10,.5);
+    }
+    .lbl_pregunta_focus {
+        margin:0px 0 0 15px;
+        background: #ffd;
+        z-index: 2;
+        padding-left: 1%;
+        padding-right: 1%;
+        font-weight:600;
+        font-size: .9em;
+        color: #b75;
+        transition: all 0.2s;
+    }
+
+    .txt_examen:focus{
+        outline: inherit;
+        border: 1px, solid;
+        border-color: #b75;
+        border-width: 1.5px;
+        
+        
+    }
+    .txt_examen:focus + .lbl_examen {
+        margin-top: -40px;
+        font-weight:600;
+        font-size: .9em;
+        color: #b75;
+        z-index: auto;
+        
+        
+    }
+    .lbl_fijo{
+        margin-top: -40px;
+        
+        font-size: .9em;
+        z-index: auto;
+        /*color: #b75;*/
+        font-weight:600;
+    }
+.lbl_pregunta_fijo{
+    margin:0px 0 0 15px;
+        background: #ffd;
+        z-index: 2;
+        padding-left: 1%;
+        padding-right: 1%;
+        font-weight:600;
+        font-size: .9em;
+        /*color: #b75;*/
+        transition: all 0.2s;
+    margin-top: 0px;
+    background: #ffd;
+    z-index: 2;
+}
+.txa_examen_fijo{
+     outline: inherit;
+        border: 1px, solid;
+        /*border-color: #b75;*/
+        border-width: 1.5px;
+}
+
+    .txt_fijo{
+        outline: inherit;
+        border: 1px, solid;
+        /*border-color: #b75;*/
+        border-width: 1.5px;
+    }
+.div_preguntas{
+    width: 95%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: 5%;
+    padding: 2%;
+    padding-right: 0;
+    position: relative;
+    
+}
+
+.rdb_examen{
+    
+    display: block;
+    width: 1.3em;
+    height: 1.8em;
+    margin: auto;
+}
+
+section{
+    display: block;
+    margin-top: -10px;
+}
+.txt_respuestas,lbl_respuestas{
+    width: 90%;
+    margin-right: 0;
+    margin-left: auto;
+    max-width: 750px;
+}
+
+.lbl_respuestas{
+    margin-left: 15%;
+    
+}
+.lbl_responsive{
+    margin-left: 5px;
+    width: 95px;
+    white-space: nowrap;
+    overflow: hidden;
+    /*text-overflow: ellipsis;*/
+}
+*::selection{
+    background: #b75;
+    color: #ffd;
+}
+
+.btn{
+    padding: 5px;
+    background: #b75;
+    outline: none;
+    border: solid 2px;
+    border-color: #ffd;
+    color: #ffd;
+    font-size: 1em;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 5px;
+    transition: all 0.2s;
+    max-width: 250px;
+    width: 50%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.0);
+	font-weight: 600;
+}
+.botones{
+    padding: 3%;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+div .botones{
+    margin-top:0px;
+    
+    padding: 0;
+    padding-left: 2%;
+}
+
+div .btn{
+    display: block;
+    margin-left: auto;
+}
+.btn_Salir{
+	top: -32px;
+	position: relative;
+	display: block;
+	
+	margin-left: auto;
+	margin-right: 0;
+}
+
+.btn:hover{
+    border-color: #b75;
+    
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.5);
+}
+.btn:focus{
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.5);
+}
+/*Esto es temporal mientras se habilita la funcion Eliminar pregunta*/
+.btn_Eliminar{
+	visibility: hidden;
+}
+.btn_agregar{
+	visibility: hidden;
+}
+.btn_agregar.Valido{
+	visibility: visible;
+}
+ul {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    list-style-type: none;
+    border-color: RGB(79, 178, 109);
+    
+    
+}
+ul li:first-child{
+    margin-top: 10px;
+    margin-left: auto;
+    min-width: 8%;
+    float: left;
+    display: inline-block;
+}
+ul li:nth-child(2){
+    
+    margin: 0;
+    padding: 0;
+    width: 90%;
+    display: inline-block;
+    
+}
+.txt_examen.EnLinea,.txa_examen.EnLinea{
+	border-color: RGB(79, 178, 109);
+	border-width: 2px;
+}
+.lbl_pregunta.EnLinea,.lbl_examen.EnLinea{
+	color: RGB(79, 178, 109);
+}
+
+ul li:first-child.EnLinea{
+	background: rgba(79,178,109,0.5);
+	border-radius: 20px;
+}
+
+
+
+
+

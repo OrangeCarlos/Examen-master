@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Examen</title>
+</head>
+<body>
+	<script src="../codigo.js"></script>
+	<script>
+//Soft  Examen Todos los derechos
+//Seccion de respuestas
+var preguntas;
+
+//El arreglo preguntas contendra las respuestas dadas por el usuario del examen
+//Respuestas= new Array;
+//El aarreglo respuestas contendra todas las respuestas correctas
+//Correctas= new Array;
+var minutos=0;
+var segundos=0;
+var horas=0;
+var tiempo=["00","00","00"];
+var duracion="";
+var Reactivos=0;
+var Aciertos=0;
+var Calificacion=0.0;
+//Seccion temporizador
+	setInterval(function()
+	{
+		segundos++;
+		if(segundos==60){
+			segundos=0;
+			minutos++;
+		}
+		if(minutos==60){
+			minutos=0;
+			horas++;
+		}
+		tiempo[0]=horas;
+		tiempo[1]=minutos;
+		tiempo[2]=segundos;
+		if(horas<10){tiempo[0]="0"+horas;}
+		if(minutos<10){tiempo[1]="0"+minutos;}
+		if(segundos<10){tiempo[2]="0"+segundos;}
+		duracion=tiempo[0]+":"+tiempo[1]+":"+tiempo[2];
+	},1000);
+//Seccion logica
+//Esta fue una actualizacion de codigo
+//Se integro el examen a una DB en la nube firebase
+
+
+
+</script>
+		<header>
+			<h1>Examen Master</h1>
+			<h2 id="Titulo">Cargando . . .</h2>
+			<h3 id="Subtitulo">Cargando . . . </h3>
+		</header>
+		<div id="Principal">
+			<div class="div_pregunta">
+				<article><b class="Numerador">1</b>. <i class="Pregunta">Cargando . . .</i></article>
+				<div class="respuestas">
+					<p  class="respuesta respuestaa" > <input class="radio radioa" name= "P1" type="radio" value="A"/> <b>a)</b> <i class="a">Cargando . . .</i> </p>
+					<p  class="respuesta respuestab"> <input class="radio radiob" name= "P1" type="radio" value="B"/> <b>b)</b> <i class="b">Cargando . . .</i></p>
+					<p  class="respuesta respuestac"> <input class="radio radioc" name= "P1" type="radio" value="C"/> <b>c)</b> <i class="c">Cargando . . .</i></p>
+					<p  class="respuesta respuestad"> <input class="radio radiod" name= "P1" type="radio" value="D"/> <b>d)</b> <i class="d">Cargando . . .</i></p>
+				</div>
+			</div>
+			</div>
+
+		
+		<footer>
+			<h1><a href="#miModal"><input type="button" value="Calificar" id="Calificar" onclick="Calificar()" /></a>
+			<a href="../"><input type="button" value="Salir" /></a>
+			</h1>
+		</footer>
+		<div id="miModal" class="modal">
+			<div class="modal-contenido">
+				<h2>Resultados</h2>
+				<p class="modal" id="Duracion">Duracion:</p>
+				<p class="modal" id="Reactivos"></p>
+				<p class="modal" id="Aciertos">No. preguntas correctas:</p>
+				<p class="modal" id="Calificacion">Su promedio:</p>
+				<a  href="#"><input type="button" value="De acuerdo" /></a>
+			</div>  
+		</div>
+		<script>
+	//variables globales
+	var radioa,radiob,radioc,radiod,A,B,C,D;
+function CargarDatos(){
+	//Esta funcion se conecta a la DB para obtener lallave de trabajo indicada en la pagina anterior
+	var firebaseConfig = {
+    apiKey: "AIzaSyBRvetMGPrdfIT-bKrirmtWMQmorQ0ElVU",
+    authDomain: "examen-master.firebaseapp.com",
+    databaseURL: "https://examen-master.firebaseio.com",
+    projectId: "examen-master",
+    storageBucket: "examen-master.appspot.com",
+    messagingSenderId: "913806402097",
+    appId: "1:913806402097:web:eac0932885dc006f69eb10",
+    measurementId: "G-63FL1VR0V6"
+  };
+	var DB;
+	
+  // Initialize Firebase
+//Conectar a BD
+	console.log("Iniciando firebase");
+	try{
+	firebase.initializeApp(firebaseConfig);
+	console.log("firebase se inicio");
+	console.log("Iniciando base de datos");
+	DB= firebase.database().ref().child("/ExamenMasterApp/DB");
+	console.log("base de datos se inicio");
+	//console.log("Seleccionando el directorio  Examenes");
+	//Examenes=DB.child("Examenes");
+	//	console.log("El directorio se selecciono");
+	}catch(Error){
+		console.log("Error en firebase "+Error.name+"\n"+Error.message);
+	}
+	//DB iniciada
+	//Condigo aqui
+	//elementos
+	var Titulo =document.getElementById('Titulo');
+	var Subtitulo=document.getElementById('Subtitulo');
+	//Arreglo de elementos
+	var Numerador=document.getElementsByClassName('Numerador');
+	var Pregunta=document.getElementsByClassName('Pregunta');
+	A=document.getElementsByClassName('a');
+	B=document.getElementsByClassName('b');
+	C=document.getElementsByClassName('c');
+	D=document.getElementsByClassName('d');
+	radioa=document.getElementsByClassName('radioa');
+	radiob=document.getElementsByClassName('radiob');
+	radioc=document.getElementsByClassName('radioc');
+	radiod=document.getElementsByClassName('radiod');
+	
+	DB.child('Examenes/'+sessionStorage.getItem('AplicarExamen')).on('value',function(snapshot){
+		console.log('Consultando Examen '+sessionStorage.getItem('AplicarExamen'));
+		Titulo.innerHTML=snapshot.val().Titulo;
+		Subtitulo.innerHTML=snapshot.val().Subtitulo;
+		var obj=snapshot.val().Preguntas;//
+		obj=Object.keys(obj);
+		console.log(obj[0]);
+		var objllave= new Array;
+		for(var i=(obj.length-1);i>=0;i--){
+			objllave.push(obj[i]);
+			//console.log(objllave[0]);
+		}
+		//console.log(objllave);
+		obj=snapshot.val().Preguntas;
+		obj=JSON.stringify(obj);
+		obj=JSON.parse(obj);
+		var Num=Object.getOwnPropertyNames(obj).length;
+		j=0;
+		k=Num;//si k es 3 sera 2
+		do{
+			k--;
+			if (k>0) {
+				ClonarDiv();
+				console.log("Elemento clonado");
+				radioa.item(j+1).setAttribute('name','P'+(j+2));
+				radiob.item(j+1).setAttribute('name','P'+(j+2));
+				radioc.item(j+1).setAttribute('name','P'+(j+2));
+				radiod.item(j+1).setAttribute('name','P'+(j+2));
+			}
+			var llave=objllave[k];
+			Pregunta.item(j).innerHTML=obj[llave]['Texto'];
+			A.item(j).innerHTML=obj[llave]['A'];
+			B.item(j).innerHTML=obj[llave]['B'];
+			C.item(j).innerHTML=obj[llave]['C'];
+			D.item(j).innerHTML=obj[llave]['D'];
+			sessionStorage.setItem('Correcta'+(j+1),obj[llave]['Respuesta']);
+			console.log('Pregunta '+(j+1)+' Respuesta '+sessionStorage.getItem('Correcta'+(j+1)));
+			Numerador.item(j).innerHTML=j+1;
+			
+			j++;
+		}while(k>0);
+		AgregandoAgentesEscucha();
+	});
+}
+
+CargarDatos();
+			
+	function AgregandoAgentesEscucha(){
+				//agregando agentes de escucha a elementos p
+				//Primero nombramos a cada elemento con su indice
+				var i;
+				//con esto habra una referencia del elemento p hacia el elemento radio para seleccionarlo
+				i=0;
+				//console.log("Aqui inicia el for i vale"+i);
+				//console.log("Se encontraron "+document.getElementsByClassName("respuesta").length+" elementos respuesta");
+				for(i=0;i<document.getElementsByClassName("respuesta").length;i++){
+				document.getElementsByClassName("respuesta").item(i).setAttribute('id','Respuesta'+i);
+				}
+				//Ahora recorremos nuevamente el arreglo de la clase
+				//Agregando el evento click
+				//Pasandole el indice propio con this
+				//Este codigo piuede ser simplificado con this
+				for (i=0;i<document.getElementsByClassName("respuesta").length;i++){
+					document.getElementsByClassName("respuesta").item(i).addEventListener("click",function(){
+					//Cuando haga click en el elemento p
+						//Se camputa como un click en el radio correspondiente
+					document.getElementsByClassName("radio").item(this.getAttribute("id").substr(9)).checked=true;
+					for(var i=0;i<document.getElementsByClassName("radio").length;i++){
+						if (document.getElementsByClassName("radio").item(i).checked){
+							document.getElementsByClassName("radio").item(i).classList.add('RadioSeleccionado');
+							document.getElementsByClassName("respuesta").item(i).classList.add('Seleccionado');
+						}else{
+							document.getElementsByClassName("radio").item(i).classList.remove('RadioSeleccionado');
+							document.getElementsByClassName("respuesta").item(i).classList.remove('Seleccionado');
+						}
+					}
+						 
+						
+						this.classList.add('Seleccionado');
+						//Se captura el valor del elemento seleccionad
+					});
+				}
+			}
+			
+			function ClonarDiv(){
+			
+			console.log("Seleccionando elemento para clonar elemento");
+            var div_pregunta=document.getElementsByClassName("div_pregunta").item(0);
+                console.log("Elemento seleccionado");
+            var nuevo_div_pregunta=div_pregunta.cloneNode(true);
+                console.log("Elemento clonado ");
+			var Principal = document.getElementById('Principal').appendChild(nuevo_div_pregunta);
+				
+            //nuevo_div_pregunta.setAttribute("id","Pregunta"+(i+2));
+                
+                //console.log("ID Generada "+(no_preguntas+1));
+			}
+			
+			function Calificar(){
+	
+	Reactivos=document.getElementsByClassName('div_pregunta').length;
+	var seleccionado;
+	for (var i=0;i<Reactivos;i++){
+		Correcta=sessionStorage.getItem('Correcta'+(i+1));
+		var RA=radioa.item(i);
+		var RB=radiob.item(i);
+		var RC=radioc.item(i);
+		var RD=radiod.item(i);
+		var REA=document.getElementsByClassName('respuestaa').item(i);
+		var REB=document.getElementsByClassName('respuestab').item(i);
+		var REC=document.getElementsByClassName('respuestac').item(i);
+		var RED=document.getElementsByClassName('respuestad').item(i);
+		if (RA.checked){valor=RA.value;}
+		if (RB.checked){valor=RB.value;}
+		if (RC.checked){valor=RC.value;}
+		if (RD.checked){valor=RD.value;}
+		if (RA.checked|RB.checked|RC.checked|RD.checked){
+			if (valor==Correcta){
+				switch(Correcta){
+					case 'A':REA.classList.add('Correcta');Aciertos++;break;
+					case 'B':REB.classList.add('Correcta');Aciertos++;break;
+					case 'C':REC.classList.add('Correcta');Aciertos++;break;
+					case 'D':RED.classList.add('Correcta');Aciertos++;break;
+				}
+			}else{
+				switch(valor){
+					case 'A':REA.classList.add('Incorrecta');break;
+					case 'B':REB.classList.add('Incorrecta');break;
+					case 'C':REC.classList.add('Incorrecta');break;
+					case 'D':RED.classList.add('Incorrecta');break;
+				}
+			}
+		}
+		
+	}
+	
+	Calificacion=Aciertos/Reactivos;
+	Calificacion=Calificacion*10;
+	modal();
+	document.getElementById('Calificar').disabled=true;
+}
+
+function modal(){
+	document.getElementById("Duracion").innerHTML = "Duracion: "+duracion;
+	document.getElementById("Aciertos").innerHTML = "Aciertos "+Aciertos;
+	document.getElementById("Calificacion").innerHTML = "Su calificacion es: "+Calificacion.toFixed(1);
+	document.getElementById("Reactivos").innerHTML = "Reactivos: "+Reactivos;
+}
+		</script>
+	</body>
+</html>

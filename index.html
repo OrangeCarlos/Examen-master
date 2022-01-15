@@ -1,0 +1,128 @@
+<html>
+    <head>
+        <title>Examen Master</title>
+         
+        <link rel="stylesheet" type="text/css" href="css/estilos.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        <meta charset="utf-8">
+        
+		<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+        
+    </head>
+    
+    <body id="body">
+		
+		<div id="Superior">
+			<header>
+				<h1>Examen Master</h1>
+			</header>
+			<section class="botones superior">
+				<input type="button"   onclick="location.href='AgregarExamen/'" class=" tab btn btn_Agregar" value="+ Agregar Examen">
+				<input type="button"   onclick="location.href='EditarExamen/'" class=" tab btn btn_Editar" value=" Editar Examen">
+				<input type="button"   onclick="location.href='AplicarExamen/';Aplicar()" class=" tab btn btn_Aplicar" value="Aplicar Examen">
+				<a href="#miModal"><input type="button" onclick="" class=" tab btn btn_Eliminar" value="Elminar Examen"></a>
+			</section>
+		</div>
+        <div id="Principal">
+			<ul id="ListaExamenes">
+				<li class="Examen" id="">
+					<p class="Titulo">Titulo</p>
+					<p class="Subtitulo">subtitulo</p>
+					<p class="No_Preguntas"><b class="NoPreguntas">16</b> pregunta(s)</p>
+				</li>
+			</ul>
+		</div>
+		<div id="miModal" class="modal">
+			<div class="modal-contenido">
+				<p>Seguro que quieres eliminar<b id="EliminarExamen" class="modal">NombreExamen</b></p>
+				<a href="#"><input type="button"   onclick="EliminarExamen()" class=" tab btn btn_EliminarSi " value="Si"></a>
+				<a href="#"><input type="button"   onclick="" class=" tab btn btn_EliminarNo " value="No"></a>
+			</div>
+		</div>
+        <script src="js/codigo.js"></script>
+		<script src="codigo.js"></script>
+        <script>
+			var ID;
+			var body = document.getElementById('body');
+			var superior = document.getElementById('Superior');
+			
+				var altura=superior.clientHeight;
+				//console.log("altura es "+altura);
+				body.style.paddingTop = altura;
+			window.addEventListener("resize",function(){
+				var body = document.getElementById('body');
+			var superior = document.getElementById('Superior');
+			
+				var altura=superior.clientHeight;
+				//console.log("altura es "+altura);
+				body.style.paddingTop = altura;
+				//console.log("El padin tip del body es "+altura);
+				//console.log("El valor es "+window.innerWidth);
+			});
+			
+			console.log("Agregando agentes de escucha");
+				for(var i=0;i<document.getElementsByClassName("Examen").length;i++){
+					document.getElementsByClassName("Examen").item(i).addEventListener("click",function(){
+					console.log("La clave es "+this.getAttribute("id"));
+					ID=this.getAttribute("id");
+				});
+				}
+			
+			
+				
+			
+            //variables globales
+            var id;
+            var contador=0;
+			var li_examen;
+			var btn_Aplicar=document.getElementsByClassName('btn_Aplicar').item(0);
+			var btn_Agregar;
+			var li;
+			var ul;
+			var contador=0;
+			var NoPreguntas;
+            
+			//body.addEventListener('click',function(){
+			//	document.getElementsByClassName('btn_Aplicar').item(0).classList.remove('Seleccionado');
+			//	document.getElementsByClassName('btn_Editar').item(0).classList.remove('Seleccionado');
+			//	document.getElementsByClassName('btn_Eliminar').item(0).classList.remove('Seleccionado');
+				
+			//	document.querySelector('li.Examen.Seleccionado').classList.remove('Seleccionado');
+			//});
+			
+			//Clonarli();
+            function ClonarLi(){
+			
+			console.log("Seleccionando elemento para clonar ");
+            li_pregunta=document.getElementsByClassName("Examen").item(0);
+                console.log("Elemento seleccionado");
+            var nuevo_li_pregunta=li_pregunta.cloneNode(true);
+                console.log("Elemento clonado ");
+				//console.log("Generando llave para elemento clonado");
+           document.getElementById('ListaExamenes').appendChild(nuevo_li_pregunta);
+                
+                //console.log("ID Generada "+(no_preguntas+1));
+			}
+			
+            function CargarDatos(){
+				ClonarLi();
+				contador++;
+				document.getElementsByClassName('Titulo').item(contador).innerHTML = "TItulo";
+				document.getElementsByClassName('Subtitulo').item(contador).innerHTML = "Subtitulo";
+				document.getElementsByClassName('NoPreguntas').item(contador).innerHTML = 5;
+				document.getElementsByClassName('Examen').item(contador).setAttribute('id',"jkln");
+				
+				console.log("Agregando agentes de escucha");
+				for(var i=0;i<document.getElementsByClassName("Examen").length;i++){
+					document.getElementsByClassName("Examen").item(i).addEventListener("click",function(){
+					console.log("La clave es "+this.getAttribute("id"));
+				});
+				}
+			}
+			
+				
+				
+        </script>
+		
+    </body>
+</html>

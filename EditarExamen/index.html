@@ -1,0 +1,144 @@
+<html>
+    <head>
+        <title>Examen Master - Editar examen</title>
+  
+        <link rel="stylesheet" type="text/css" href="css/estilos.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        <meta charset="utf-8">
+        
+		
+    </head>
+    <body>
+		<header>
+            <h1>Editar examen</h1>
+        </header>
+        <div class="Titulos">
+			<input class="Titulos Titulo" type="text"  autofocus name="txt_titulo" tabindex="1" onkeyup="fijar()"/>
+            <label class="Titulos Titulo" >Titulo</label>
+            <input class="Titulos Subtitulo" type="text" name="txt_subtitulo" tabindex="2" onkeyup="fijar()"/>
+            <label class="Titulos Subtitulo">Subtitulo</label>
+       	</div>
+        	<div id="Contenedor">
+				<div class="Pregunta">
+				<label for="" class="Preguntas Texto">Pregunta <b class="Preguntas Texto Numerador">1</b> de <b class="Preguntas Texto Numero">1</b></label>
+				<textarea class="Preguntas Texto" name="txt_pregunta" tabindex="3" rows="1" onkeyup="fijar2()" onblur="TextareaBlur()" contenteditable="false" onfocus="TextareaFocus()"></textarea>
+				<div class="Preguntas Respuestas">
+					<ul class="Preguntas Respuestas A">
+						<li class="Preguntas Respuestas A">
+							<input class="Preguntas Respuestas OpcionA" type="radio" name="PX"  value="A" />
+						</li>
+						<li>
+							<input class="Preguntas Respuestas A" type="text"  name="txt_respuesta" onkeyup="fijar()"/>
+							<label class="Preguntas Respuestas A" for="">Respuesta 1</label>
+						</li>
+					</ul>
+					<ul class="Preguntas Respuestas B">
+						<li class="Preguntas Respuestas B">
+							<input class="Preguntas Respuestas OpcionB" type="radio" name="PX"  value="B"/>
+						</li>
+						<li>
+							<input class="Preguntas Respuestas B" type="text"  name="txt_respuesta_a_1" onkeyup="fijar()"/>
+							<label class="Preguntas Respuestas B" for="">Respuesta 2</label>
+						</li>
+					</ul>
+					<ul class="Preguntas Respuestas C">
+						<li class="Preguntas Respuestas C">
+							<input class="Preguntas Respuestas OpcionC" type="radio" name="PX"  value="C"/>
+						</li>
+						<li>
+							<input class="Preguntas Respuestas C" type="text"  name="txt_respuesta" onkeyup="fijar()"/>
+							<label class="Preguntas Respuestas C" for="">Respuesta 3</label>
+						</li>
+					</ul>
+					<ul class="Preguntas Respuestas D">
+						<li class="Preguntas Respuestas D">
+							<input class="Preguntas Respuestas OpcionD" type="radio" name="PX"  value="D" />
+						</li>
+						<li>
+							<input class="Preguntas Respuestas D" type="text"  name="txt_respuesta" onkeyup="fijar()"/>
+							<label class="Preguntas Respuestas D" for="">Respuesta 4</label>
+						</li>
+					</ul>
+				</div>
+				<div class="">
+					<input class="Preguntas BotonEliminar" type="button" value=" - Eliminar pregunta">
+				</div>
+			</div>
+		</div>
+        <div class="Botones">
+            <input type="button" onclick="AgregarPregunta()" class="Botones" id="AgregarPregunta" value=" + Agregar pregunta">
+        	<input type="button"   onclick="location.href='../'" class="BotonSalir" value="Salir">
+		</div>
+        <script src="js/autosize.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+        <script src="js/codigo.js"></script>
+		
+        <script>
+            //variables globales
+            
+            autosize(document.querySelectorAll('textarea.Texto'));
+            
+            //seccion de funciones
+            function fijar(){
+                //variables locales
+                var textos;
+                var valor;
+                var i;
+				var labels;
+				console.log("Funcion fijar iniciando");
+				textos=document.getElementsByClassName('txt_examen');
+                labels=document.getElementsByClassName('lbl_examen');
+               for(i=0;i<document.getElementsByClassName('txt_examen').length;i++){
+                   valor=textos.item(i).value;
+				   console.log("Verificando elemento "+i+" con texto"+valor);
+                if(valor.length>0){
+                    textos.item(i).classList.add('txt_fijo');
+                    labels.item(i).classList.add('lbl_fijo');
+                }else{
+                    textos.item(i).classList.remove('txt_fijo');
+                    labels.item(i).classList.remove('lbl_fijo');
+                }
+                }
+            }
+            
+            function fijar2(){
+                var texto;
+                var label;
+                var valor;
+                var i;
+                
+                for(i=0;i<document.getElementsByClassName('txa_examen').length;i++){
+                    
+                texto=document.getElementsByClassName('txa_examen').item(i);
+                label=document.getElementsByClassName('lbl_pregunta').item(i);
+                valor=texto.value;
+                if (valor!=""){
+                   label.classList.add('lbl_pregunta_fijo');
+                    texto.classList.add('txa_examen_fijo');
+                }else{
+                    label.classList.remove('lbl_pregunta_fijo');
+                    texto.classList.remove('txa_examen_fijo');
+                }
+                }
+            }
+			
+            function TextareaFocus(){
+			var labels=document.getElementsByClassName('lbl_pregunta');
+			var textos=document.getElementsByClassName('txa_examen');
+				for(var i=0;i<textos.length;i++){
+					labels.item(i).classList.add('lbl_pregunta_focus');
+                	textos.item(i).classList.add('txa_examen_focus');
+				}
+            }
+			
+            function TextareaBlur(){
+               	var labels=document.getElementsByClassName('lbl_pregunta');
+				var textos=document.getElementsByClassName('txa_examen');
+				for(var i=0;i<textos.length;i++){
+					labels.item(i).classList.remove('lbl_pregunta_focus');
+                	textos.item(i).classList.remove('txa_examen_focus');
+				}
+            }
+        </script>
+    </body>
+</html>

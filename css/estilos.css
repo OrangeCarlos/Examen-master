@@ -1,0 +1,247 @@
+*{
+    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body{
+    font-family: sans-serif;
+    margin: 0;
+    background: #ffd;
+    padding: 0;
+    margin: 0;
+    padding-top:calc(150px);
+}
+header{
+    margin-top: -10px;
+	margin-left: auto;
+	margin-right: auto;
+    box-shadow: 0 0 20px 1px rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding-top: 30px;
+    background: #b75;
+	width: 90%;
+}
+
+
+#Superior{
+	top: 0;
+	z-index: 2;
+	box-shadow: 0 10px 50px -10px rgba(0,0,0,0.5);
+	position: fixed;
+	width: 100%;
+	height: auto;
+	background: #ffd;
+	border-bottom: solid 2px #b75;
+}
+h1{
+    margin: 0;
+    padding: 0;
+    width: auto;
+    font-size: 3em;
+    text-align: center;
+    letter-spacing: 0.3em;
+    color: #ffd;
+}
+*::selection{
+    background: #b75;
+    color: #ffd;
+}
+.botones{
+    padding: 3%;
+    padding-top: 30px;
+	padding-bottom: 5px;
+    margin-top: 0;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+    display: block;
+    
+}
+.btn{
+    padding: 5px;
+    background: #b75;
+    outline: none;
+    border: solid 2px;
+    border-color: #ffd;
+    color: #ffd;
+    font-size: 1em;
+	font-weight: 600;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 5px;
+    transition: all 0.2s;
+    max-width: 250px;
+    width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: auto;
+	margin-left: auto;
+	display: inline;
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.0);
+}
+.btn:first-child{
+	margin-right: 0;
+	margin-left: 0;
+}
+.btn:nth-child(2){
+	margin-left: 20px;
+}
+.btn_Aplicar{
+	visibility: hidden;
+}
+.btn_Aplicar.Seleccionado{
+	visibility:visible;
+}
+.btn_Eliminar{
+	visibility: hidden;
+}
+.btn_Eliminar.Seleccionado{
+	visibility:visible;
+}
+.btn_Editar{
+	visibility: hidden;
+}
+.btn_Editar.Seleccionado{
+	visibility: visible;
+}
+
+.btn:hover{
+    border-color: #b75;
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.5);
+}
+.btn:focus{
+    box-shadow: 0 0 5px 1px rgba(0,0,0,0.5);
+}
+#Principal{
+	top:0px;
+	display: block;
+	position: relative;
+	width: 85%;
+	border: 2px solid;
+	border-color: #b75;
+	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+}
+ul {
+    box-sizing: border-box;
+    margin: 0;
+    width: 100%;
+	padding-left: auto;
+	padding-right: auto;
+    list-style-type: none;
+	
+    /*border-color: RGB(141, 109, 40);
+	background: #E28484;*/
+}
+ul li{
+	display: inline;
+    margin-top: 10px;
+    margin-left: auto;
+	margin-right: 10px;
+	padding: 15px;
+	width: 200px;
+    min-width: 80px;
+	max-width: 300px;
+    float: left;
+    display: inline-block;
+	border: solid 2px;
+	border-color: #b75;
+	border-radius: 10px;
+	transition: 0.5s all;
+}
+li .Titulo{
+	overflow-x:hidden;
+	font-weight: 600;
+	font-size: 1.3em;
+	text-align: center;
+}
+li .Subtitulo{
+	overflow-x:hidden;
+	font-weight: 100;
+	font-size: 1.1em;
+	text-align: center;
+}
+li .No_Preguntas{
+	padding-top: 10px;
+	overflow-x:hidden;
+	font-weight: 100;
+	font-size: .9em;
+	text-align: right;
+}
+
+ul li:hover{
+	box-shadow: 0 0 5px 5px RGBA(187, 119, 85, 0.89);
+	border-radius: 20px;
+	transition: 0.5s all;
+}
+ul li.Seleccionado{
+	box-shadow: 0 0 5px 5px RGBA(187, 119, 85, 0.89);
+	border-radius: 40px;
+	transition: 0.5s all;
+}
+.txt_examen{
+        font-size: 1em;
+        background: rgba(0,0,0,0.0);
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-top: 10px;
+        padding-left: 2%;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 5px;
+    }
+.modal-contenido{/*El modal*/
+	overflow-x: hidden;
+	box-sizing: border-box;
+  background-color:#ffd;
+  width:60%;
+  min-width: 100px;
+  padding: 5%;
+	margin-top: 20%;
+  margin-left: auto;
+	margin-right: auto;
+  position: relative;
+  border:solid;
+  text-align:right;
+
+}
+div.modal{/*Elementos del modal*/
+  	z-index: 20;
+	background-color: RGBA(255, 255, 189, 0.42);
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  opacity:0;
+  pointer-events:none;
+  transition: all 0.5s;
+	text-decoration: none;
+}
+#miModal:target{/*Es la base */
+  opacity:1;
+  pointer-events:auto;
+}
+.modal-contenido input{
+	font-size: 1.3em;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	max-width: 80px;
+	
+}
+a{
+	text-decoration: none;
+}
+
+
+
+
+
+
+
